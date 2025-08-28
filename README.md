@@ -1,5 +1,7 @@
 # Minecraft Authentication Through Discord
 
+[![CI](https://github.com/clxrityy/mc-discord-auth/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/clxrityy/mc-discord-auth/actions/workflows/ci.yml)
+
 ## Overview
 
 This project links Minecraft accounts to Discord accounts for authentication, using a TypeScript Discord bot (Vercel serverless) and a Java Minecraft plugin (Spigot/Paper).
