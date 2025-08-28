@@ -27,27 +27,20 @@ public class DiscordAuthHttp {
     }
 
     public void notifyPlayerJoin(Player player) {
-        Bukkit.getScheduler()
-                .runTaskAsynchronously(plugin,
-                        () -> sendJson("{\"action\":\"player_join\",\"playerUuid\":\"" + player.getUniqueId()
-                                + "\",\"playerName\":\""
-                                + player.getName() + "\"}"));
+        Bukkit.getScheduler().runTaskAsynchronously(plugin,
+                () -> sendJson("{\"action\":\"player_join\",\"playerUuid\":\"" + player.getUniqueId()
+                        + "\",\"playerName\":\"" + player.getName() + "\"}"));
     }
 
     public void notifyPlayerLeave(Player player) {
-        Bukkit.getScheduler()
-                .runTaskAsynchronously(plugin,
-                        () -> sendJson("{\"action\":\"player_leave\",\"playerUuid\":\"" + player.getUniqueId()
-                                + "\",\"playerName\":\""
-                                + player.getName() + "\"}"));
+        Bukkit.getScheduler().runTaskAsynchronously(plugin,
+                () -> sendJson("{\"action\":\"player_leave\",\"playerUuid\":\"" + player.getUniqueId()
+                        + "\",\"playerName\":\"" + player.getName() + "\"}"));
     }
 
     public void verifyPlayer(Player player, String code) {
         Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
-            String json = String.format(
-                    "{\"action\":\"verify_player\",\"playerUuid\":\"%s\",\"playerName\":\"%s\",\"data\":{\"verificationCode\":\"%s\"}}",
-                    player.getUniqueId(), player.getName(), code);
-            String response = sendJson(json);
+            String response = doVerify(player, code);
             if (response != null && response.contains("\"success\":true")) {
                 player.sendMessage("§a[DiscordAuth] Account linked! You can now use Discord features.");
             } else {
@@ -58,9 +51,7 @@ public class DiscordAuthHttp {
 
     public void getPlayerStatus(Player player) {
         Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
-            String json = String.format("{\"action\":\"get_player_status\",\"playerUuid\":\"%s\"}",
-                    player.getUniqueId());
-            String response = sendJson(json);
+            String response = doGetPlayerStatus(player);
             if (response != null && response.contains("\"linkedDiscord\":true")) {
                 player.sendMessage("§a[DiscordAuth] Your Discord is linked!");
             } else {
@@ -69,7 +60,8 @@ public class DiscordAuthHttp {
         });
     }
 
-    private String sendJson(String json) {
+    // Made protected for testing (tests can override to avoid real HTTP calls)
+    protected String sendJson(String json) {
         try {
             URL url = java.net.URI.create(apiUrl).toURL();
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -88,5 +80,19 @@ public class DiscordAuthHttp {
             plugin.getLogger().log(Level.WARNING, "[DiscordAuth] HTTP error: {0}", e.getMessage());
         }
         return null;
+    }
+
+    // Synchronous helpers for unit testing. These build the JSON payload and call
+    // sendJson.
+    public String doVerify(Player player, String code) {
+        String json = String.format(
+                "{\"action\":\"verify_player\",\"playerUuid\":\"%s\",\"playerName\":\"%s\",\"data\":{\"verificationCode\":\"%s\"}}",
+                player.getUniqueId(), player.getName(), code);
+        return sendJson(json);
+    }
+
+    public String doGetPlayerStatus(Player player) {
+        String json = String.format("{\"action\":\"get_player_status\",\"playerUuid\":\"%s\"}", player.getUniqueId());
+        return sendJson(json);
     }
 }

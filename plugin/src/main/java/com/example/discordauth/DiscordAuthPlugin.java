@@ -50,6 +50,8 @@ public class DiscordAuthPlugin extends JavaPlugin implements Listener {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        // Delegate to static handler to allow unit testing without constructing a
+        // JavaPlugin
         if (!(sender instanceof Player)) {
             if (sender != null) {
                 sender.sendMessage("This command can only be used by players.");
@@ -57,8 +59,12 @@ public class DiscordAuthPlugin extends JavaPlugin implements Listener {
             return true;
         }
 
-        Player player = (Player) sender;
-        String name = command.getName().toLowerCase();
+        return handleCommand((Player) sender, command.getName().toLowerCase(), args, http);
+    }
+
+    // Static command handler so tests can invoke logic without a JavaPlugin
+    // instance.
+    public static boolean handleCommand(Player player, String name, String[] args, DiscordAuthHttp http) {
         switch (name) {
         case "discordlink" -> {
             player.sendMessage(
