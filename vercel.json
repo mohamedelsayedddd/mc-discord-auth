@@ -1,0 +1,10 @@
+{
+    "functions": {
+        "api/discord.ts": {
+            "maxDuration": 10
+        },
+        "api/minecraft.ts": {
+            "maxDuration": 10
+        }
+    }
+}

@@ -1,0 +1,44 @@
+name: DiscordAuth
+version: 1.0.0
+description: Discord account linking for Minecraft
+author: YourName
+main: com.example.discordauth.DiscordAuthPlugin
+api-version: 1.21
+api: bukkit
+
+commands:
+  discordlink:
+    description: Get information about linking your Discord account
+    usage: /discordlink
+    permission: discordauth.link
+  verify:
+    description: Verify your account with a Discord code
+    usage: /verify <code>
+    permission: discordauth.verify
+  discordstatus:
+    description: Check your Discord linking status
+    usage: /discordstatus
+    permission: discordauth.status
+
+permissions:
+  discordauth.*:
+    description: All DiscordAuth permissions
+    children:
+      discordauth.link:
+        description: Access to link command
+        default-permission: true
+      discordauth.verify:
+        description: Access to verify command
+        default-permission: true
+      discordauth.status:
+        description: Access to status command
+        default-permission: true
+  discordauth.link:
+    description: Access to link command
+    default-permission: true
+  discordauth.verify:
+    description: Access to verify command
+    default-permission: true
+  discordauth.status:
+    description: Access to status command
+    default-permission: true

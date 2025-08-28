@@ -1,0 +1,5 @@
+# DiscordAuth Plugin Configuration
+# Set your API endpoint and API key here
+
+api-url: "https://your-vercel-domain.vercel.app/api/minecraft"
+api-key: "changeme"
